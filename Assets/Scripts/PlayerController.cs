@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 using System.Collections;
 public class PlayerController : MonoBehaviour
 {
@@ -49,7 +48,7 @@ public class PlayerController : MonoBehaviour
         float x = Random.Range(spawnMinRange.x, spawnMaxRange.x);
         float y = Random.Range(spawnMinRange.y, spawnMaxRange.y);
         float z = Random.Range(spawnMinRange.z, spawnMaxRange.z);
-        Vector3 spawnPosition = new Vector3(x, y, z);
+        Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y,transform.position.z);
 
         Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
     }
