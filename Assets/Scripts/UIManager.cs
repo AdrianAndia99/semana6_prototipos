@@ -48,6 +48,7 @@ public class UIManager : MonoBehaviour
         }
 
         fadeImage.color = new Color(startColor.r, startColor.g, startColor.b, 1f);
+        fadeImage.gameObject.SetActive(false);
     }
 
     private IEnumerator FadeInUI()
