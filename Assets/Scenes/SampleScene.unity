@@ -760,6 +760,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthChangedEvent: {fileID: 11400000, guid: 78e37f612c9847e45a8e3e8b8e099b3a, type: 2}
+  objectToSpawn: {fileID: 6111537923060830042, guid: c160230449bd8244cbb75c2cb10561da, type: 3}
+  spawnMinRange: {x: -4, y: 0.5, z: -4}
+  spawnMaxRange: {x: 4, y: 3, z: 3}
 --- !u!54 &493686462
 Rigidbody:
   m_ObjectHideFlags: 0

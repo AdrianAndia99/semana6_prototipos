@@ -3,6 +3,9 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private LifeEventSO healthChangedEvent;
+    [SerializeField] private GameObject objectToSpawn;
+    [SerializeField] private Vector3 spawnMinRange;
+    [SerializeField] private Vector3 spawnMaxRange;
 
     private int health = 100;
     private Rigidbody rb;
@@ -26,12 +29,23 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             TakeDamage(10);
+            SpawnObject();
         }
     }
 
     public void OnWalk(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+    }
+
+    private void SpawnObject()
+    {
+        float x = Random.Range(spawnMinRange.x, spawnMaxRange.x);
+        float y = Random.Range(spawnMinRange.y, spawnMaxRange.y);
+        float z = Random.Range(spawnMinRange.z, spawnMaxRange.z);
+        Vector3 spawnPosition = new Vector3(x, y, z);
+
+        Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
     }
     private void FixedUpdate()
     {
