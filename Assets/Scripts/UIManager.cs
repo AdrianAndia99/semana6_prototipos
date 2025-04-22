@@ -13,7 +13,10 @@ public class UIManager : MonoBehaviour
     {
         healthChangedEvent.OnEventRaised += UpdateHealthUI;
     }
-
+    private void Start()
+    {
+        fadeImage.gameObject.SetActive(false);
+    }
     private void OnDisable()
     {
         healthChangedEvent.OnEventRaised -= UpdateHealthUI;
@@ -31,6 +34,7 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator FadeOutUI()
     {
+        fadeImage.gameObject.SetActive(true);
         Color startColor = fadeImage.color;
         startColor.a = 0f;
 
