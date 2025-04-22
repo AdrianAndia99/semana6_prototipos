@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
+using System.Collections;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private LifeEventSO healthChangedEvent;
@@ -11,10 +13,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private Vector2 moveInput;
     private float moveSpeed = 5f;
-
+    private Renderer playerRenderer;
+    private Color originalColor;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        playerRenderer = GetComponent<Renderer>();
+        originalColor = playerRenderer.material.color;
     }
 
     public void TakeDamage(int amount)
@@ -30,6 +35,7 @@ public class PlayerController : MonoBehaviour
         {
             TakeDamage(10);
             SpawnObject();
+            StartCoroutine(ChangeColorTemporarily(Color.red, 0.5f));
         }
     }
 
@@ -46,6 +52,12 @@ public class PlayerController : MonoBehaviour
         Vector3 spawnPosition = new Vector3(x, y, z);
 
         Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
+    }
+    private IEnumerator ChangeColorTemporarily(Color newColor, float duration)
+    {
+        playerRenderer.material.color = newColor;
+        yield return new WaitForSeconds(duration);
+        playerRenderer.material.color = originalColor;
     }
     private void FixedUpdate()
     {
