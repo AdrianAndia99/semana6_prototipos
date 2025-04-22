@@ -1,10 +1,18 @@
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private LifeEventSO healthChangedEvent;
 
     private int health = 100;
+    private Rigidbody rb;
+    private Vector2 moveInput;
+    private float moveSpeed = 5f;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     public void TakeDamage(int amount)
     {
@@ -19,5 +27,15 @@ public class PlayerController : MonoBehaviour
         {
             TakeDamage(10);
         }
+    }
+
+    public void OnWalk(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
+    }
+    private void FixedUpdate()
+    {
+        Vector3 movement = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed * Time.deltaTime;
+        rb.MovePosition(transform.position + movement);
     }
 }

@@ -29,7 +29,7 @@ public class EnemyController : MonoBehaviour
     private IEnumerator ScaleReaction()
     {
         Vector3 targetScale = originalScale * 1.3f;
-        float duration = 1.5f;
+        float duration = 1f;
         float t = 0;
 
         while (t < duration)
